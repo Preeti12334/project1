@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Conferencing Web App</title>
+  <style>
+    /* CSS styles for video container */
+    #video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Video Conferencing Web App</h1>
+  
+  <!-- Video container -->
+  <div id="video-container">
+    <video id="local-video" autoplay></video>
+  </div>
+
+  <!-- Textual Chat -->
+  <div>
+    <h2>Chat</h2>
+    <div id="chat-messages"></div>
+    <input type="text" id="chat-input" placeholder="Type your message..." />
+    <button id="send-button">Send</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

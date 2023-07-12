@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Content Management Tool</title>
+  <style>
+    #container {
+      width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    #dropzone {
+      width: 100%;
+      height: 300px;
+      border: 2px dashed #ccc;
+      margin-bottom: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    #dropzone.active {
+      border-color: #000;
+    }
+    
+    .item {
+      width: 100px;
+      height: 100px;
+      background-color: #eee;
+      border: 1px solid #ccc;
+      display: inline-block;
+      margin-right: 10px;
+      cursor: move;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Content Management Tool</h1>
+    <p>Drag and drop items below to add content:</p>
+    <div id="dropzone"></div>
+    <div id="sidebar">
+      <div class="item" draggable="true">Text</div>
+      <div class="item" draggable="true">Image</div>
+      <div class="item" draggable="true">Video</div>
+      <!-- Add more items as needed -->
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var dropzone = document.getElementById("dropzone");
+      var sidebarItems = document.querySelectorAll("#sidebar .item");
+
+      dropzone.addEventListener("dragenter", function(event) {
+        event.preventDefault();
+        dropzone.classList.add("active");
+      });
+
+      dropzone.addEventListener("dragover", function(event) {
+        event.preventDefault();
+      });
+
+      dropzone.addEventListener("dragleave", function(event) {
+        event.preventDefault();
+        dropzone.classList.remove("active");
+      });
+
+      dropzone.addEventListener("drop", function(event) {
+        event.preventDefault();
+        dropzone.classList.remove("active");
+        var itemText = event.dataTransfer.getData("text/plain");
+        var newItem = document.createElement("div");
+        newItem.textContent = itemText;
+        dropzone.appendChild(newItem);
+      });
+
+      sidebarItems.forEach(function(item) {
+        item.addEventListener("dragstart", function(event) {
+          event.dataTransfer.setData("text/plain", item.textContent);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
